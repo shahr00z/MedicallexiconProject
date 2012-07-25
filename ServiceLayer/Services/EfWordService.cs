@@ -74,7 +74,8 @@ namespace ServiceLayer.Services
 
 		public int GetCount()
 		{
-			throw new NotImplementedException();
+			var count = _words.Count();
+			return (count);
 		}
 
 		public int GetWordsCountByLanguage(Language language)

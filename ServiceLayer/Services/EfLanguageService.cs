@@ -70,7 +70,8 @@ namespace ServiceLayer.Services
 
 		public int GetCount()
 		{
-			throw new NotImplementedException();
+			var count = _Languages.Count();
+			return (count);
 		}
 
 		#endregion
