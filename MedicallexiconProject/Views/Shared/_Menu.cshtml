@@ -1,0 +1,37 @@
+﻿@{
+	var menus = new[]
+		{
+			new {LinkText = "Home", ActionName = "Index", ControllerName = "Home", Roles = "All"},
+			new {LinkText = "About", ActionName = "About", ControllerName = "Home", Roles = "Anonymous"},
+			new {LinkText = "Contact", ActionName = "Contact", ControllerName = "Home", Roles = "Anonymous"},
+			new {LinkText = "Administrator", ActionName = "Index", ControllerName = MVC.Administrator.Name, Roles = "Administrator"},
+			new {LinkText = "Word", ActionName = "Index", ControllerName = MVC.Word.Name, Roles = "User"},
+			new {LinkText = "Language", ActionName = "Index", ControllerName = MVC.Language.Name, Roles = "User"},
+			new {LinkText = "Category", ActionName = "Index", ControllerName = MVC.Category.Name, Roles = "User"}
+		};
+}
+<ul id="menu">
+	@if (HttpContext.Current.User.Identity.IsAuthenticated)
+	{
+		String[] roles = Roles.GetRolesForUser();
+		var links = from item in menus
+		            where item.Roles.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries)
+			            .Any(x => roles.Contains(x) || x == "All")
+		            select item;
+		foreach (var link in links)
+		{
+			@: <li> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
+		}
+	}
+	else
+	{
+		var links = from item in menus
+		            where item.Roles.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries)
+			            .Any(x => new[] {"All", "Anonymous"}.Contains(x))
+		            select item;
+		foreach (var link in links)
+		{
+			@: <li> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
+		}
+	}
+</ul>

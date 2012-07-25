@@ -1,0 +1,72 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>@ViewBag.Title -Medicallexicon.com</title>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="@BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
+		<link href="@BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
+
+		<link href="@BundleTable.Bundles.ResolveBundleUrl("~/Content/bootstrap/css")" rel="stylesheet">
+		<script src="@BundleTable.Bundles.ResolveBundleUrl("~/Scripts/bootstrap/js")"> </script>
+
+	</head>
+	<body>
+		<header>
+			<div class="content-wrapper" dir="rtl">
+				<div class="navbar ">
+					<div class="navbar-inner">
+						<div class="container">
+							<a class="brand" href="/">Medicallexicons</a>
+							<div class="nav-collapse collapse">
+							
+								<nav class="nav">
+									@if (Session["MyMenu"] == null)
+									{
+										Session["MyMenu"] = Html.Partial(MVC.Shared.Views._Menu);
+									}
+									@Session["MyMenu"]
+								</nav>
+								
+							</div>
+							@Html.Partial("_LoginPartial")
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+		</header>
+		<div id="body" class="container">
+			@RenderSection("featured", required: false)
+			<section class="content-wrapper main-content clear-fix">
+				@RenderBody()
+			</section>
+		</div>
+		<footer>
+			<div class="  modal-footer">
+				<div class="float-left">
+					<p>&copy; @DateTime.Now.Year - Medicallexicons.com</p>
+				</div>
+				<div>
+					<a href="http://facebook.com/Bluebird.shahla">
+						<img src="~/Images/SocialIcon/facebook.png" alt="Facebook Social Network Icon" />
+					</a>
+					<a href="http://twitter.com/Shahrooze">
+						<img src="~/Images/SocialIcon/twitter.png" alt="Twitter Social Network Icon" />
+					</a>
+					<a href="#">
+						<img src="~/Images/SocialIcon/google+.png" alt="Google+ Social Network Icon" />
+					</a>
+				</div>
+			</div>
+		</footer>
+		@RenderSection("scripts", required: false)
+	</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@using DomainClasses.Models
+@using MedicallexiconProject.Helpers
+@model IEnumerable<DomainClasses.Models.Word>
+
+<table class="table table-striped table-bordered table-condensed" dir="rtl">
+
+	<tr class="webgrid-header">
+		<th style="text-align: center">ردیف
+		</th>
+		<th style="text-align: center">کلمه
+		</th>
+		<th style="text-align: center">زبان
+		</th>
+		<th style="text-align: center">دسته بندی
+		</th>
+	</tr>
+	@{
+		int x = 0;
+	}
+	@foreach (Word item in Model)
+	{
+		<tr  >
+			<td style="text-align: center">
+				<span class="badge badge-info">@Html.Raw(++x)</span>
+			</td>
+			<td style="text-align: center">
+			@Html.ActionLink(linkText: item.Name, result: MVC.Word.Details(item.ID).AddRouteValue("name", item.Name.ToSeoUrl()))
+			<td style="text-align: center">
+				@item.Language.Name
+			</td>
+			<td style="text-align: center">
+				@item.Category.Name
+			</td>
+		</tr>
+	}
+</table>

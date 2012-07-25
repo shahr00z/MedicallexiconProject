@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{A855AE25-D673-4627-9B46-4158C34E2B0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{8D4F82DC-7CD8-46B2-B3F9-0694CC02C3C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainClasses", "DomainClasses", "{AB65A426-977B-429D-BE59-8240B1FC60E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLayer", "ServiceLayer", "{DAE777FE-C980-4FBA-89B0-D51BA569F6AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicallexiconProject", "MedicallexiconProject\MedicallexiconProject.csproj", "{BAD430A1-3C11-4BF5-91BE-E1028293AEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicallexiconProject.DomainClasses", "DomainClasses\MedicallexiconProject.DomainClasses.csproj", "{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicallexiconProject.DataLayer", "DataLayer\MedicallexiconProject.DataLayer.csproj", "{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicallexiconProject.ServiceLayer", "ServiceLayer\MedicallexiconProject.ServiceLayer.csproj", "{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD430A1-3C11-4BF5-91BE-E1028293AEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD430A1-3C11-4BF5-91BE-E1028293AEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD430A1-3C11-4BF5-91BE-E1028293AEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD430A1-3C11-4BF5-91BE-E1028293AEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FD4D0B-E2C7-4A4A-82CD-E7C2AC57D8DB} = {DAE777FE-C980-4FBA-89B0-D51BA569F6AB}
+		{3CAB1EE7-5CE7-45D7-8EA0-5DB364C40B81} = {AB65A426-977B-429D-BE59-8240B1FC60E9}
+		{6F7D8F49-CCF4-4C73-BBD7-C13B615DA5B9} = {8D4F82DC-7CD8-46B2-B3F9-0694CC02C3C8}
+		{BAD430A1-3C11-4BF5-91BE-E1028293AEE0} = {A855AE25-D673-4627-9B46-4158C34E2B0A}
+	EndGlobalSection
+EndGlobal

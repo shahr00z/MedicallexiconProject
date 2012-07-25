@@ -1,0 +1,119 @@
+﻿@using Links
+@{
+	ViewBag.Title = "Home Page";
+}
+@section scripts
+{
+	<script>
+	    $('#helpButton').popover()
+	</script>
+}
+<script src="@Scripts.Dictonary_js" type="text/javascript"> </script>
+
+<div class="hero-unit">
+	<div style="float: right">
+		<img src="~/Images/Logo.png" alt="Medicallexicon home page picture">
+	</div>
+	<h1>Medicallexicons</h1>
+	<p>Is an Online Medical Wiki</p>
+	<p>
+		<a href="#" id="helpButton" class="btn btn-info btn-large" rel="popover" data-content="You can Register in site and create wiki page" data-original-title="Learning">More Learning</a>
+	</p>
+
+</div>
+
+
+
+
+<div class="page-header" />
+<h2>Search</h2>
+<div class="well form-search">
+	@using (Ajax.BeginForm("Search", controllerName: "Word", ajaxOptions: new AjaxOptions
+		{
+			HttpMethod = "POST",
+			InsertionMode = InsertionMode.Replace,
+			UpdateTargetId = "SearchResult",
+			LoadingElementId = "Progress"
+		}))
+	{
+		//Search Textbox 
+
+	<input type="text"  name="query" data-autocomplete="@Url.Action(MVC.Word.ActionNames.QuickSearch, MVC.Word.Name)"  class="input-xlarge search-query">
+	<button id="fat-btn" data-loading-text="loading..." class="btn btn-large btn-success">
+		Search
+	</button>
+	}
+</div>
+
+
+<div id="Progress" style="display: none">
+	<div class="progress large  progress-striped active">
+		<div class="bar"
+			 style="width: 100%;">
+		</div>
+	</div>
+</div>
+
+<div id="SearchResult">
+</div>
+
+
+<script id="searchTemplate" type="text/x-jquery-tmpl">
+	<tr dir="rtl">
+		<td>${Name}
+		</td>
+		<td>${Name}         
+		</td>
+	</tr>
+</script>
+
+<ul class="thumbnails">
+	<li class="span3">
+		<div class="thumbnail">
+			<img src="http://placehold.it/260x180" alt="Medicallexicon home page picture">
+			<div class="caption">
+				<h5>Thumbnail label</h5>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				<p>
+					<a href="#" class="btn btn-primary">Action</a>
+				</p>
+			</div>
+		</div>
+	</li>
+	<li class="span3">
+		<div class="thumbnail">
+			<img src="http://placehold.it/260x180" alt="Medicallexicon home page picture">
+			<div class="caption">
+				<h5>Thumbnail label</h5>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				<p>
+					<a href="#" class="btn btn-primary">Action</a>
+				</p>
+			</div>
+		</div>
+	</li>
+	<li class="span3">
+		<div class="thumbnail">
+			<img src="http://placehold.it/260x180" alt="Medicallexicon home page picture">
+			<div class="caption">
+				<h5>Thumbnail label</h5>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				<p>
+					<a href="#" class="btn btn-primary">Action</a>
+				</p>
+			</div>
+		</div>
+	</li>
+	<li class="span3">
+		<div class="thumbnail">
+			<img src="http://placehold.it/260x180" alt="Medicallexicon home page picture">
+			<div class="caption">
+				<h5>Thumbnail label</h5>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				<p>
+					<a href="#" class="btn btn-primary">Action</a>
+				</p>
+			</div>
+		</div>
+	</li>
+</ul>

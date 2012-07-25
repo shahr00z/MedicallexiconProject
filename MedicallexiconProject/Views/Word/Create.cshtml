@@ -1,0 +1,83 @@
+﻿@model MedicallexiconProject.ViewModel.WordViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="right">
+    <h3>Words List</h3>
+
+
+</div>
+<p>
+    <a href="~/Word" id="btnBack" class="btn btn-group">Back to Word List
+    </a>
+</p>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(model => model.Text)
+    </div>
+    <div>
+        @Html.TextAreaFor(model => model.Text, htmlAttributes: new { style = "width:98%; height:500px" })
+        @Html.ValidationMessageFor(model => model.Text)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.LanguageName)
+    </div>
+    <div>
+        @Html.DropDownListFor(x => x.SelectedLanguageID,
+                                new SelectList(Model.Languages, "Value", "Text"), "Select Language")
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.CategoryName)
+    </div>
+    <div>
+        @Html.DropDownListFor(x => x.SelectedCategoryID,
+                                new SelectList(Model.Categories, "Value", "Text"), "Select Category")
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Description)
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <p>
+        <input type="button" class="btn btn-success" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"> </script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"> </script>
+    <link rel="stylesheet" href="~/redactor/css/redactor.css" />
+
+    <script type="text/javascript" src="lib/jquery-1.7.min.js"> </script>
+    <script src="~/redactor/redactor.js"> </script>
+    <script type="text/javascript">
+        $(document).ready(
+	        function () {
+	            $('#Text').redactor({
+	                focus: true,
+	                imageUpload: "@Url.Action(result:MVC.Word.UploadWordsPicture())"
+	            });
+	        }
+	    );
+    </script>
+}

@@ -1,0 +1,166 @@
+﻿@section scripts
+{
+	<script type="text/javascript">
+	    function LaodWordInfo(id) {
+	        showProgress();
+	        $.ajax({
+	                type: "Post",
+	                //Just Use URL Action
+	                url: '@Url.Action(MVC.Word.WordInfo())',
+	                data: JSON.stringify({ ID: id }),
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                complete: function(xhr, status) {
+	                    var data = xhr.responseText;
+	                    if (status === 'error' || !data) {
+
+	                    } else {
+	                        var dialog = $("#dialog");
+	                        dialog.html(data);
+	                        dialog.dialog("open");
+	                    }
+	                    hideProgress();
+	                    return false;
+	                }
+	            }
+	        );
+	    }
+
+	    function showProgress() {
+	        $('#Progress').css("display", "block");
+	    }
+
+	    function hideProgress() {
+	        $('#Progress').css("display", "none");
+	    }
+
+	    $(function() {
+	        $("#dialog").dialog({
+	            autoOpen: false,
+	            show: "fade",
+	            hide: "fade",
+	            width: 550,
+	            title: "WordInfo",
+	            resizable: false
+	        });
+	    });
+	</script>
+}
+@{
+	ViewBag.Title = "Index";
+}
+@using System.Globalization
+@model IEnumerable<MedicallexiconProject.ViewModel.WordViewModel>
+@{
+	ViewBag.Title = "مدیریت کلمه ها";
+}
+@helper WebGridPageFirstItem(WebGrid grid)
+{ @(((grid.PageIndex + 1)*grid.RowsPerPage) - (grid.RowsPerPage - 1)) }
+@helper WebGridPageLastItem(WebGrid grid)
+{
+	if (grid.TotalRowCount < (grid.PageIndex + 1*grid.RowsPerPage))
+	{
+		@grid.TotalRowCount
+	}
+	else
+	{
+		@((grid.PageIndex + 1)*grid.RowsPerPage)
+	}
+}
+<div class="right">
+	<h3>Words List</h3>
+
+
+</div>
+<p>
+	<a href="~/" id="btnBack" class="btn btn-group">Back to Home Page
+	</a>
+	<a href="~/Word/Create" id="btnCreateWord" class="btn btn-success">Create Word
+	</a>
+</p>
+@{
+	var grid = new WebGrid(
+		source: Model,
+		canPage: true,
+		rowsPerPage: 10,
+		canSort: true,
+		defaultSort: "Word"
+		);
+	int rowIndex = ((grid.PageIndex + 1)*grid.RowsPerPage) - (grid.RowsPerPage - 1);
+}
+<div id="container" dir="rtl">
+	@grid.GetHtml(
+		tableStyle: "table table-striped table-bordered table-condensed",
+		htmlAttributes: new {id = "MyGrid"},
+		mode: WebGridPagerModes.All,
+		columns:
+			grid.Columns(
+				grid.Column(header: "",
+				            style: "text-align-center-col",
+				            columnName: "#",
+				            format: @<text>@(rowIndex++)</text>),
+				grid.Column(header: "کلمه",
+				            columnName: "Word",
+				            style: "text-align-center-col"
+				            , format: @<span style="font-weight: bold">@item.Name</span>
+					),
+				grid.Column(header: "زبان",
+				            columnName: "Language",
+				            style: "text-align-center-col"
+				            , format: @<span style="font-weight: bold">@item.LanguageName</span>
+					),
+				grid.Column(header: "دسته بندی",
+				            columnName: "Category",
+				            style: "text-align-center-col"
+				            , format: @<span style="font-weight: bold">@item.CategoryName</span>
+					),
+				grid.Column(header: "تاریخ",
+				            style: "text-align-center-col",
+				            columnName: "Date",
+				            format: item =>
+								{
+									int ym = item.CreatedDate.Year;
+									int mm = item.CreatedDate.Month;
+									int dm = item.CreatedDate.Day;
+									var persianCalendar = new PersianCalendar();
+									int ys = persianCalendar.GetYear
+										(new DateTime(ym, mm, dm, new GregorianCalendar()));
+									int ms = persianCalendar.GetMonth
+										(new DateTime(ym, mm, dm, new GregorianCalendar()));
+									int ds = persianCalendar.GetDayOfMonth
+										(new DateTime(ym, mm, dm, new GregorianCalendar()));
+									return ys + "/" + ms.ToString("00") + "/" + ds.ToString("00");
+								}
+					),
+				grid.Column(header: "",
+				            style: "text-align-center-col",
+				            format: item => @Html.ActionLink
+					                            (linkText: "Edit",
+					                             actionName: "Edit",
+					                             controllerName: "Word",
+					                             routeValues: new {id = item.Id},
+					                             htmlAttributes: new {@class = "btn btn-group"})),
+				grid.Column(
+					format: @<a  class="btn btn-group " onclick=" LaodWordInfo(@item.ID) "  >Details</a>),
+				grid.Column(header: "",
+				            style: "text-align-center-col",
+				            format: item => @Html.ActionLink
+					                            (linkText: "Delete",
+					                             actionName: "Delete",
+					                             controllerName: "Word",
+					                             routeValues: new {id = item.Id},
+					                             htmlAttributes: new {@class = "btn btn-group"}))
+			)
+		       )
+	<strong>Page:</strong> @(grid.PageIndex + 1)
+	/ @grid.PageCount, <strong>Records:</strong> @WebGridPageFirstItem(@grid) - @WebGridPageLastItem(@grid)
+	of @grid.TotalRowCount
+</div>
+<div id="WordInfo">
+</div>
+<div id="Progress" style="display: none">
+	<img src="@Url.Content("~/Images/loading.gif")" alt="loading..."  />
+</div>
+
+<div id="dialog" class="modal-body" dir="rtl">
+</div>
