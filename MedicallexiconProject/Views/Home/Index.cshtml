@@ -1,6 +1,6 @@
 ﻿@using Links
 @{
-	ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page||Medicallexicon||Medical Dictonary";
 }
 @section scripts
 {
@@ -16,6 +16,7 @@
 	</div>
 	<h1>Medicallexicons</h1>
 	<p>Is an Online Medical Wiki</p>
+	<p>@Html.Action(MVC.Home.ActionNames.GetEntityCount)</p>
 	<p>
 		<a href="#" id="helpButton" class="btn btn-info btn-large" rel="popover" data-content="You can Register in site and create wiki page" data-original-title="Learning">More Learning</a>
 	</p>
