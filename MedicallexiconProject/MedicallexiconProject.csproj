@@ -515,7 +515,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Uploads\Words\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Words\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>

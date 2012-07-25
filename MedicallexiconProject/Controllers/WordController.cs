@@ -75,20 +75,19 @@ namespace MedicallexiconProject.Controllers
 		}
 
 
-
 		[HttpPost]
 		[AllowUploadSpecialFilesOnly(".jpg,.gif,.png")]
 		public virtual ActionResult UploadWordsPicture(HttpPostedFileBase file)
 		{
 			string fileName = Path.GetFileName(file.FileName);
-			string filePath = "~/App_Data/Uploads/Words/" + file.FileName;
+			string imageFath = "../../Uploads/Words/"+fileName;
 			if (file.ContentLength > 0 && fileName != null)
 			{
-				string path = Path.Combine(Server.MapPath("~/App_Data/Uploads/Words"), fileName);
+				string path = Path.Combine(Server.MapPath("~/Uploads/Words"), fileName);
 				file.SaveAs(path);
 			}
 
-			return Content("<img src='" + filePath + "' />");
+			return Content("<img src='" + imageFath + "' />");
 		}
 
 		public virtual ActionResult Details(int id)
