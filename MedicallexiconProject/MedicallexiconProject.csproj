@@ -210,12 +210,15 @@
   <ItemGroup>
     <Compile Include="AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="AdministratorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="CategoryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\BundleConfig.cs" />
     <Compile Include="Classes\CustomMapper\Category.cs" />
@@ -237,9 +240,11 @@
     <Compile Include="Helpers\URLEncoder.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="LanguageController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Binders\PersianDateModelBinder.cs" />
@@ -247,18 +252,22 @@
     <Compile Include="SecurityModule\AllowUploadSpecialFilesOnlyAttribute .cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\CountViewModel.cs" />
     <Compile Include="ViewModel\LanguageViewModel.cs" />
     <Compile Include="ViewModel\PictureViewModel.cs" />
     <Compile Include="ViewModel\WordViewModel.cs" />
     <Compile Include="WordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +477,10 @@
     <Content Include="Scripts\upshot.js" />
     <Content Include="Scripts\upshot.knockout.extensions.js" />
     <Content Include="Scripts\upshot.min.js" />
+    <Content Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -561,15 +574,10 @@
     <None Include="Properties\PublishProfiles\Medical.pubxml" />
     <Content Include="Views\Word\_WordList.cshtml" />
     <Content Include="T4MVC.tt.settings.t4" />
-    <Content Include="T4MVC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Word\Create.cshtml" />
     <Content Include="Scripts\Uploadify\check.php" />
     <Content Include="Scripts\Uploadify\uploadify.fla" />
     <Content Include="Scripts\Uploadify\uploadify.php" />
-    <Content Include="Views\Word\UploadWordsPicture.cshtml" />
     <Content Include="redactor\.DS_Store" />
     <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Administrator\WordAdmin.cshtml" />
@@ -577,6 +585,7 @@
     <Content Include="Views\Administrator\LanguageAdmin.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Home\_GetEntityCount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

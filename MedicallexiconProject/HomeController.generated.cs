@@ -23,9 +23,6 @@ using T4MVC;
 namespace MedicallexiconProject.Controllers {
     public partial class HomeController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected HomeController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -58,6 +55,7 @@ namespace MedicallexiconProject.Controllers {
             public readonly string Index = "Index";
             public readonly string About = "About";
             public readonly string Contact = "Contact";
+            public readonly string GetEntityCount = "GetEntityCount";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -65,6 +63,7 @@ namespace MedicallexiconProject.Controllers {
             public const string Index = "Index";
             public const string About = "About";
             public const string Contact = "Contact";
+            public const string GetEntityCount = "GetEntityCount";
         }
 
 
@@ -73,6 +72,7 @@ namespace MedicallexiconProject.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string _GetEntityCount = "~/Views/Home/_GetEntityCount.cshtml";
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string Contact = "~/Views/Home/Contact.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
@@ -95,6 +95,11 @@ namespace MedicallexiconProject.Controllers {
 
         public override System.Web.Mvc.ActionResult Contact() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Contact);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetEntityCount() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetEntityCount);
             return callInfo;
         }
 

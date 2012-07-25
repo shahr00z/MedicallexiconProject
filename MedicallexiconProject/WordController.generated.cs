@@ -138,7 +138,7 @@ namespace MedicallexiconProject.Controllers {
         public ActionParamsClass_UploadWordsPicture UploadWordsPictureParams { get { return s_params_UploadWordsPicture; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_UploadWordsPicture {
-            public readonly string id = "id";
+            public readonly string file = "file";
         }
         static readonly ActionParamsClass_Details s_params_Details = new ActionParamsClass_Details();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -201,7 +201,6 @@ namespace MedicallexiconProject.Controllers {
             public readonly string Create = "~/Views/Word/Create.cshtml";
             public readonly string Details = "~/Views/Word/Details.cshtml";
             public readonly string Index = "~/Views/Word/Index.cshtml";
-            public readonly string UploadWordsPicture = "~/Views/Word/UploadWordsPicture.cshtml";
         }
     }
 
@@ -228,16 +227,9 @@ namespace MedicallexiconProject.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UploadWordsPicture(int? id) {
+        public override System.Web.Mvc.ActionResult UploadWordsPicture(System.Web.HttpPostedFileBase file) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadWordsPicture);
-            callInfo.RouteValueDictionary.Add("id", id);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult UploadWordsPicture(System.Collections.Generic.IEnumerable<System.Web.HttpPostedFileBase> files, int? id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadWordsPicture);
-            callInfo.RouteValueDictionary.Add("files", files);
-            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("file", file);
             return callInfo;
         }
 

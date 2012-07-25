@@ -22,7 +22,7 @@ namespace MedicallexiconProject.Controllers
 		private readonly IWordService _wordService;
 
 		public WordController(IUnitOfWork uow, IWordService wordService, ICategoryService categoryService,
-							  ILanguageService languageService)
+		                      ILanguageService languageService)
 		{
 			_wordService = wordService;
 			_categoryService = categoryService;
@@ -74,33 +74,21 @@ namespace MedicallexiconProject.Controllers
 			return View(wordViewModel);
 		}
 
-		[HttpGet]
-		public virtual ActionResult UploadWordsPicture(int? id)
-		{
-			if (id == null) return RedirectToAction(MVC.Word.Index());
-			return View();
-		}
+
 
 		[HttpPost]
 		[AllowUploadSpecialFilesOnly(".jpg,.gif,.png")]
-		public virtual ActionResult UploadWordsPicture(IEnumerable<HttpPostedFileBase> file, int? id)
+		public virtual ActionResult UploadWordsPicture(HttpPostedFileBase file)
 		{
-			if (file == null)
+			string fileName = Path.GetFileName(file.FileName);
+			string filePath = "~/App_Data/Uploads/Words/" + file.FileName;
+			if (file.ContentLength > 0 && fileName != null)
 			{
-				return View();
+				string path = Path.Combine(Server.MapPath("~/App_Data/Uploads/Words"), fileName);
+				file.SaveAs(path);
 			}
 
-
-			foreach (HttpPostedFileBase f in file)
-			{
-				string fileName = Path.GetFileName(f.FileName);
-				if (f.ContentLength > 0 && fileName != null)
-				{
-					string path = Path.Combine(Server.MapPath("~/App_Data/Uploads/Words"), fileName);
-					f.SaveAs(path);
-				}
-			}
-			return RedirectToAction(MVC.Word.Index());
+			return Content("<img src='" + filePath + "' />");
 		}
 
 		public virtual ActionResult Details(int id)
@@ -142,7 +130,7 @@ namespace MedicallexiconProject.Controllers
 		public virtual ActionResult QuickSearch(string term)
 		{
 			var word = _wordService.Search(term).
-				Select(r => new { label = r.Name });
+				Select(r => new {label = r.Name});
 
 			return Json(word, JsonRequestBehavior.AllowGet);
 		}
