@@ -515,6 +515,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\Helpers\" />
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\Words\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
@@ -572,6 +573,7 @@
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Helpers.cshtml" />
     <None Include="Properties\PublishProfiles\Medical.pubxml" />
     <Content Include="Views\Word\_WordList.cshtml" />
     <Content Include="T4MVC.tt.settings.t4" />
@@ -587,6 +589,9 @@
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Home\_GetEntityCount.cshtml" />
+    <Content Include="Views\Word\_DeleteWord.cshtml" />
+    <Content Include="Views\Word\CreateRelationshipBetweenWord.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -76,6 +76,7 @@ namespace MedicallexiconProject
 					x.ForRequestedType<ILanguageService>().TheDefaultIsConcreteType<EfLanguageService>();
 
 					x.ForRequestedType<IPictureService>().TheDefaultIsConcreteType<EfPictureService>();
+					x.ForRequestedType<IRelationshipBetweenWords>().TheDefaultIsConcreteType<EfRelationshipBetweenWordsService>();
 				});
 			//Set current Controller factory as StructureMapControllerFactory  
 			ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());

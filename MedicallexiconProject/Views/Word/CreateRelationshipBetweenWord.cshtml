@@ -1,0 +1,17 @@
+﻿@model MedicallexiconProject.ViewModel.WordViewModel
+@{
+    ViewBag.Title = "CreateRelationshipBetweenWord";
+}
+
+<div class="right">
+    <h3>Create Relation Between Word</h3>
+
+
+</div>
+<p>
+    <a href="~/Word" id="btnBack" class="btn btn-group">Back to Word List
+    </a>
+</p>
+<h4>Create relation for this word.</h4>
+@Html.Partial(partialViewName: MVC.Word.Views._WordInfo, model: Model)
+@Html.Partial(MVC.Shared.Views._Search)

@@ -16,17 +16,19 @@ namespace MedicallexiconProject.Controllers
 {
 	public partial class WordController : Controller
 	{
+		private readonly IRelationshipBetweenWords _RelationshipBetweenWordsService;
 		private readonly ICategoryService _categoryService;
 		private readonly ILanguageService _languageService;
 		private readonly IUnitOfWork _uow;
 		private readonly IWordService _wordService;
 
 		public WordController(IUnitOfWork uow, IWordService wordService, ICategoryService categoryService,
-		                      ILanguageService languageService)
+		                      ILanguageService languageService, IRelationshipBetweenWords relationshipBetweenWordsService)
 		{
 			_wordService = wordService;
 			_categoryService = categoryService;
 			_languageService = languageService;
+			_RelationshipBetweenWordsService = relationshipBetweenWordsService;
 			_uow = uow;
 		}
 
@@ -40,19 +42,34 @@ namespace MedicallexiconProject.Controllers
 		}
 
 		[HttpGet]
-		public virtual ActionResult Create()
+		public virtual ActionResult Create(int id = 0)
 		{
-			var model = new WordViewModel
-				{
-					Categories = _categoryService.GetSelectList(),
-					Languages = _languageService.GetSelectList()
-				};
-
-			return View(model);
+			Word word = _wordService.GetByID(id);
+			if (word != null)
+			{
+				var model = new WordViewModel
+					{
+						Categories = _categoryService.GetSelectList(),
+						Languages = _languageService.GetSelectList(),
+						WordRelatedID = word.ID,
+						WordRelatedName = word.Name
+					};
+				return View(model);
+			}
+			else
+			{
+				var model = new WordViewModel
+					{
+						Categories = _categoryService.GetSelectList(),
+						Languages = _languageService.GetSelectList(),
+						WordRelatedID = 0
+					};
+				return View(model);
+			}
 		}
 
 		[HttpPost]
-		public virtual ActionResult Create(WordViewModel wordViewModel)
+		public virtual ActionResult Create(WordViewModel wordViewModel, int id = 0)
 		{
 			var word = new Word();
 			Mapper.Map(wordViewModel, word);
@@ -66,8 +83,14 @@ namespace MedicallexiconProject.Controllers
 			if (ModelState.IsValid)
 			{
 				_wordService.AddNew(word);
+				if (id != 0)
+				{
+					var relationshipBetweenWords = new RelationshipBetweenWords
+						{MainWord = word, RelatedWord = _wordService.GetByID(id)};
+					_RelationshipBetweenWordsService.AddNew(relationshipBetweenWords);
+				}
 				_uow.SaveChanges();
-				return RedirectToAction(MVC.Word.UploadWordsPicture().AddRouteValue("ID", word.ID));
+				return RedirectToAction(MVC.Word.ActionNames.CreateRelationshipBetweenWord, new {id = word.ID});
 			}
 			wordViewModel.Categories = _categoryService.GetSelectList();
 			wordViewModel.Languages = _languageService.GetSelectList();
@@ -80,7 +103,7 @@ namespace MedicallexiconProject.Controllers
 		public virtual ActionResult UploadWordsPicture(HttpPostedFileBase file)
 		{
 			string fileName = Path.GetFileName(file.FileName);
-			string imageFath = "../../Uploads/Words/"+fileName;
+			string imageFath = "/Uploads/Words/" + fileName;
 			if (file.ContentLength > 0 && fileName != null)
 			{
 				string path = Path.Combine(Server.MapPath("~/Uploads/Words"), fileName);
@@ -92,11 +115,10 @@ namespace MedicallexiconProject.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			Word word = _wordService.GetByID(id);
-			var wordMapper = new WordMapper();
-			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			WordViewModel wordViewModel = CreateWordViewModelByWordID(id);
 			return View(wordViewModel);
 		}
+
 
 		[HttpPost]
 		public virtual ActionResult Delete(int id)
@@ -115,9 +137,7 @@ namespace MedicallexiconProject.Controllers
 		[HttpPost]
 		public virtual ActionResult WordInfo(int id)
 		{
-			Word word = _wordService.GetByID(id);
-			var wordMapper = new WordMapper();
-			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			WordViewModel wordViewModel = CreateWordViewModelByWordID(id);
 			return PartialView(viewName: MVC.Word.Views._WordInfo, model: wordViewModel);
 		}
 
@@ -140,6 +160,27 @@ namespace MedicallexiconProject.Controllers
 		{
 			Word word = _wordService.GetWordByWordNameAndLanguageID(name, selectedLanguageID);
 			return word.Name != null ? Json(false) : Json(true);
+		}
+
+		[HttpGet]
+		public virtual ActionResult CreateRelationshipBetweenWord(int id)
+		{
+			WordViewModel wordViewModel = CreateWordViewModelByWordID(id);
+			return View(wordViewModel);
+		}
+
+		[HttpPost]
+		public virtual ActionResult CreateRelationshipBetweenWord(int mainWordID, int wordID)
+		{
+			return View();
+		}
+
+		private WordViewModel CreateWordViewModelByWordID(int id)
+		{
+			Word word = _wordService.GetByID(id);
+			var wordMapper = new WordMapper();
+			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			return wordViewModel;
 		}
 	}
 }

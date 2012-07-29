@@ -32,6 +32,7 @@ namespace T4MVC {
             public readonly string _Layout_Mobile = "~/Views/Shared/_Layout.Mobile.cshtml";
             public readonly string _LoginPartial = "~/Views/Shared/_LoginPartial.cshtml";
             public readonly string _Menu = "~/Views/Shared/_Menu.cshtml";
+            public readonly string _Search = "~/Views/Shared/_Search.cshtml";
             public readonly string _SpaLayout = "~/Views/Shared/_SpaLayout.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
             static readonly _DisplayTemplates s_DisplayTemplates = new _DisplayTemplates();
