@@ -7,7 +7,7 @@
     @{
         if (Model.WordRelatedID != 0)
         {
-        <h3>Create Word for  @Html.ActionLink(Model.WordRelatedName, MVC.Word.ActionNames.WordInfo, new { id = Model.ID })</h3>
+        <h3>Create Word for  @Html.ActionLink(Model.WordRelatedName, MVC.Word.ActionNames.WordInfo, new { id = Model.WordRelatedID })</h3>
         }
         else
         {
@@ -73,19 +73,13 @@
 </div>
 
 @section Scripts {
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"> </script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"> </script>
     <link rel="stylesheet" href="~/redactor/css/redactor.css" />
 
-    <script type="text/javascript" src="lib/jquery-1.7.min.js"> </script>
     <script src="~/redactor/redactor.js"> </script>
     <script type="text/javascript">
         $(document).ready(
 	        function () {
 	            $('#Text').redactor({
-	                focus: true,
-	                autoformat: false,
-	                convertDivs: false
 	            });
 	        }
 	    );
