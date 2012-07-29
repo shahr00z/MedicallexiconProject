@@ -36,7 +36,6 @@ namespace ServiceLayer.Services
 
 		public Word GetByID(int id)
 		{
-
 			Word word = _words.Find(id);
 			return (word);
 		}
@@ -49,7 +48,10 @@ namespace ServiceLayer.Services
 
 		public void Delete(int id)
 		{
-			_words.Remove(GetByID(id));
+			var toDelete = new Word { ID = id };
+			_words.Attach(toDelete);
+			_words.Remove(toDelete);
+			
 		}
 
 		public void Edit(int id, Word obj)
@@ -64,46 +66,48 @@ namespace ServiceLayer.Services
 
 		public IList<Word> GetAllWordByCategory(Category category)
 		{
-			throw new NotImplementedException();
+			List<Word> words = _words.Where(x => x.Category == category).ToList();
+			return (words);
 		}
 
 		public IList<Word> GetAllWordByLanguage(Language language)
 		{
-			throw new NotImplementedException();
+			List<Word> words = _words.Where(x => x.Language == language).ToList();
+			return (words);
 		}
 
 		public int GetCount()
 		{
-			var count = _words.Count();
+			int count = _words.Count();
 			return (count);
 		}
 
 		public int GetWordsCountByLanguage(Language language)
 		{
-			throw new NotImplementedException();
+			int count = _words.Count(x => x.Language == language);
+			return count;
 		}
 
 		public int GetWordsCountByCategory(Category category)
 		{
-			throw new NotImplementedException();
+			int count = _words.Count(x => x.Category == category);
+			return count;
 		}
 
 		public IQueryable<Word> Search(string term)
 		{
-
-
 			IQueryable<Word> word = _words
-							.Where(r => r.Name.Contains(term) ||
-										String.IsNullOrEmpty(term))
-							.Take(10);
+				.Where(r => r.Name.Contains(term) ||
+				            String.IsNullOrEmpty(term))
+				.Take(10);
 			return (word);
 		}
 
 		public IQueryable<Word> QuickSearch(string term)
 		{
-			var word = _words
-					   .Where(r => r.Name.Contains(term))
-					   .Take(10);
+			IQueryable<Word> word = _words
+				.Where(r => r.Name.Contains(term))
+				.Take(10);
 			return (word);
 		}
 

@@ -1,0 +1,11 @@
+﻿
+@helper CheckBoxList(string name, List<System.Web.Mvc.SelectListItem> items)
+{
+    <div class="btn-group" data-toggle="buttons-checkbox">
+        @foreach (var item in items)
+        {
+            @item.Text
+            <input type="checkbox" class="btn" name="@name" value="@item.Value" checked="@item.Selected"/>
+        }
+    </div>
+}

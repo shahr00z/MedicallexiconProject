@@ -1,36 +1,43 @@
 ﻿@using DomainClasses.Models
 @using MedicallexiconProject.Helpers
-@model IEnumerable<DomainClasses.Models.Word>
+@model IEnumerable<Word>
 
 <table class="table table-striped table-bordered table-condensed" dir="rtl">
 
-	<tr class="webgrid-header">
-		<th style="text-align: center">ردیف
-		</th>
-		<th style="text-align: center">کلمه
-		</th>
-		<th style="text-align: center">زبان
-		</th>
-		<th style="text-align: center">دسته بندی
-		</th>
-	</tr>
-	@{
-		int x = 0;
-	}
-	@foreach (Word item in Model)
-	{
-		<tr  >
-			<td style="text-align: center">
-				<span class="badge badge-info">@Html.Raw(++x)</span>
-			</td>
-			<td style="text-align: center">
-			@Html.ActionLink(linkText: item.Name, result: MVC.Word.Details(item.ID).AddRouteValue("name", item.Name.ToSeoUrl()))
-			<td style="text-align: center">
-				@item.Language.Name
-			</td>
-			<td style="text-align: center">
-				@item.Category.Name
-			</td>
-		</tr>
-	}
+    <tr class="webgrid-header">
+
+        <th style="text-align: center">Check</th>
+
+        <th style="text-align: center">ID
+        </th>
+        <th style="text-align: center">Word
+        </th>
+        <th style="text-align: center">Language
+        </th>
+        <th style="text-align: center">Category
+        </th>
+    </tr>
+    @{
+        int x = 0;
+    }
+    @foreach (Word item in Model)
+    {
+        <tr>
+            <td style="text-align: center; width: 35px;">
+                <input type='checkbox' name='@item.ID'  />
+            </td>
+
+            <td style="text-align: center">
+                <span class="badge badge-info">@Html.Raw(++x)</span>
+            </td>
+            <td style="text-align: center">
+            @Html.ActionLink(linkText: item.Name, result: MVC.Word.Details(item.ID).AddRouteValue("name", item.Name.ToSeoUrl()))
+            <td style="text-align: center">
+                @item.Language.Name
+            </td>
+            <td style="text-align: center">
+                @item.Category.Name
+            </td>
+        </tr>
+    }
 </table>

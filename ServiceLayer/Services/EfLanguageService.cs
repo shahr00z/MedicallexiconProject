@@ -61,17 +61,22 @@ namespace ServiceLayer.Services
 		{
 			return (GetAll().
 				Select(x => new SelectListItem
-				            	{
-				            		Text = x.Name,
-				            		Value = x.ID.ToString(CultureInfo.InvariantCulture)
-				            	}).ToList());
+					{
+						Text = x.Name,
+						Value = x.ID.ToString(CultureInfo.InvariantCulture)
+					}).ToList());
 		}
 
 
 		public int GetCount()
 		{
-			var count = _Languages.Count();
+			int count = _Languages.Count();
 			return (count);
+		}
+
+		public int GetCountLanguageWithoutWord()
+		{
+			throw new NotImplementedException();
 		}
 
 		#endregion

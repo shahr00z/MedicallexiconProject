@@ -50,11 +50,13 @@
     <Compile Include="Interfaces\ILanguageService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IPictureService.cs" />
+    <Compile Include="Interfaces\IRelationshipBetweenWords.cs" />
     <Compile Include="Interfaces\IWordService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EfPictureService.cs" />
     <Compile Include="Services\EfLanguageService.cs" />
     <Compile Include="Services\EfCategoryService.cs" />
+    <Compile Include="Services\EfRelationshipBetweenWordsService.cs" />
     <Compile Include="Services\EfWordService.cs" />
   </ItemGroup>
   <ItemGroup>

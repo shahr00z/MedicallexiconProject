@@ -1,0 +1,29 @@
+﻿<div class="well form-search">
+	@using (Ajax.BeginForm(MVC.Word.ActionNames.Search, controllerName: MVC.Word.Name, ajaxOptions: new AjaxOptions
+		{
+			HttpMethod = "POST",
+			InsertionMode = InsertionMode.Replace,
+			UpdateTargetId = "SearchResult",
+			LoadingElementId = "Progress"
+		}))
+	{
+		//Search Textbox 
+
+	<input type="text"  name="query" data-autocomplete="@Url.Action(MVC.Word.ActionNames.QuickSearch, MVC.Word.Name)"  class="input-xlarge search-query">
+	<button id="fat-btn" data-loading-text="loading..." class="btn  btn-success">
+		Search
+	</button>
+	}
+</div>
+
+
+<div id="Progress" style="display: none">
+	<div class="progress large  progress-striped active">
+		<div class="bar"
+			 style="width: 100%;">
+		</div>
+	</div>
+</div>
+
+<div id="SearchResult">
+</div>

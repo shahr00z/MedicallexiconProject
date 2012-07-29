@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DomainClasses.Models;
+﻿using DomainClasses.Models;
 
 namespace ServiceLayer.Interfaces
 {
-	public interface ILanguageService:IBaseService<Language>
+	public interface ILanguageService : IBaseService<Language>
 	{
+		int GetCountLanguageWithoutWord();
 	}
 }
