@@ -29,19 +29,19 @@ namespace MedicallexiconProject
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.MapRoute(
 				name: "Word",
-				url: "{controller}/{action}/{id}/{Name}",
-				defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional, name = UrlParameter.Optional});
+				url: "{controller}/{action}/{id}/{Name}/{wordID}",
+				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, name = UrlParameter.Optional, wordID = UrlParameter.Optional });
 			routes.MapHttpRoute(
 				name: "DefaultApi",
 				routeTemplate: "api/{controller}/{id}",
-				defaults: new {id = RouteParameter.Optional}
+				defaults: new { id = RouteParameter.Optional }
 				);
 		}
 
 		protected void Application_Start()
 		{
 			ConfigurMapping();
-			ModelBinders.Binders.Add(typeof (DateTime), new PersianDateModelBinder());
+			ModelBinders.Binders.Add(typeof(DateTime), new PersianDateModelBinder());
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 			BundleTable.Bundles.EnableBootstrapBundle();
 

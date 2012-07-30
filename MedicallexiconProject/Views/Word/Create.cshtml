@@ -29,7 +29,12 @@
         @Html.EditorFor(model => model.Name)
         @Html.ValidationMessageFor(model => model.Name)
     </div>
-
+    <div>
+        @Html.DropDownListFor(x => x.SelectedCategoryID,
+                                new SelectList(Model.Categories, "Value", "Text"), "Select Category")
+        @Html.DropDownListFor(x => x.SelectedLanguageID,
+                                new SelectList(Model.Languages, "Value", "Text"), "Select Language")
+    </div>
     <div>
         @Html.LabelFor(model => model.Text)
     </div>
@@ -43,17 +48,9 @@
         @Html.LabelFor(model => model.LanguageName)
     </div>
     <div>
-        @Html.DropDownListFor(x => x.SelectedLanguageID,
-                                new SelectList(Model.Languages, "Value", "Text"), "Select Language")
     </div>
 
-    <div>
-        @Html.LabelFor(model => model.CategoryName)
-    </div>
-    <div>
-        @Html.DropDownListFor(x => x.SelectedCategoryID,
-                                new SelectList(Model.Categories, "Value", "Text"), "Select Category")
-    </div>
+
 
     <div>
         @Html.LabelFor(model => model.Description)

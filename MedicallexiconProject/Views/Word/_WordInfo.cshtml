@@ -4,6 +4,7 @@
 	<th>@Html.DisplayNameFor(model => model.Name)</th>
 	<th>@Html.DisplayNameFor(model => model.Description)</th>
 	<th>@Html.DisplayNameFor(model => model.CategoryName)</th>
+	<th>@Html.DisplayNameFor(model => model.RelatedCount)</th>
 	<tr />
 	<tr>
 		<td>
@@ -14,6 +15,9 @@
 		</td>
 		<td>
 			@Html.DisplayFor(model => model.CategoryName)
+		</td>	
+        <td>
+			@Html.DisplayFor(model => model.RelatedCount)
 		</td>
 	</tr>
 </table>

@@ -145,7 +145,7 @@ namespace MedicallexiconProject.Controllers {
         public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Create {
-            public readonly string id = "id";
+            public readonly string wordID = "wordID";
         }
         static readonly ActionParamsClass_UploadWordsPicture s_params_UploadWordsPicture = new ActionParamsClass_UploadWordsPicture();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -239,16 +239,16 @@ namespace MedicallexiconProject.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create(int id) {
+        public override System.Web.Mvc.ActionResult Create(int wordID) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("wordID", wordID);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create(MedicallexiconProject.ViewModel.WordViewModel wordViewModel, int id) {
+        public override System.Web.Mvc.ActionResult Create(MedicallexiconProject.ViewModel.WordViewModel wordViewModel, int wordID) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
             callInfo.RouteValueDictionary.Add("wordViewModel", wordViewModel);
-            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("wordID", wordID);
             return callInfo;
         }
 

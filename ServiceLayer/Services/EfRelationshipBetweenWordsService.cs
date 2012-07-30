@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using DataLayer.Context;
 using DomainClasses.Models;
@@ -13,7 +14,7 @@ namespace ServiceLayer.Services
 		private readonly IDbSet<RelationshipBetweenWords> _relationshipBetweenWords;
 		private readonly IUnitOfWork _uow;
 
-		public EfRelationshipBetweenWordsService( IUnitOfWork uow)
+		public EfRelationshipBetweenWordsService(IUnitOfWork uow)
 		{
 			_uow = uow;
 			_relationshipBetweenWords = _uow.Set<RelationshipBetweenWords>();
@@ -61,6 +62,16 @@ namespace ServiceLayer.Services
 		public int GetCount()
 		{
 			throw new NotImplementedException();
+		}
+
+		public int GetLagnuageCount(int wordID)
+		{
+			return _relationshipBetweenWords.Count(x => x.MainWord.ID == wordID);
+		}
+
+		public int GetRelationCount(int wordID)
+		{
+			return _relationshipBetweenWords.Count(x => x.MainWord.ID == wordID);
 		}
 
 		#endregion

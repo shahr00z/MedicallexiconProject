@@ -23,7 +23,7 @@ namespace MedicallexiconProject.Controllers
 		private readonly IWordService _wordService;
 
 		public WordController(IUnitOfWork uow, IWordService wordService, ICategoryService categoryService,
-		                      ILanguageService languageService, IRelationshipBetweenWords relationshipBetweenWordsService)
+							  ILanguageService languageService, IRelationshipBetweenWords relationshipBetweenWordsService)
 		{
 			_wordService = wordService;
 			_categoryService = categoryService;
@@ -42,9 +42,9 @@ namespace MedicallexiconProject.Controllers
 		}
 
 		[HttpGet]
-		public virtual ActionResult Create(int id = 0)
+		public virtual ActionResult Create(int wordID = 0)
 		{
-			Word word = _wordService.GetByID(id);
+			Word word = _wordService.GetByID(wordID);
 			if (word != null)
 			{
 				var model = new WordViewModel
@@ -69,7 +69,7 @@ namespace MedicallexiconProject.Controllers
 		}
 
 		[HttpPost]
-		public virtual ActionResult Create(WordViewModel wordViewModel, int id = 0)
+		public virtual ActionResult Create(WordViewModel wordViewModel, int wordID = 0)
 		{
 			var word = new Word();
 			Mapper.Map(wordViewModel, word);
@@ -83,14 +83,15 @@ namespace MedicallexiconProject.Controllers
 			if (ModelState.IsValid)
 			{
 				_wordService.AddNew(word);
-				if (id != 0)
+				if (wordID != 0)
 				{
-					var relationshipBetweenWords = new RelationshipBetweenWords
-						{MainWord = word, RelatedWord = _wordService.GetByID(id)};
+					var relationshipBetweenWords = new RelationshipBetweenWords { MainWord = word, RelatedWord = _wordService.GetByID(wordID) };
 					_RelationshipBetweenWordsService.AddNew(relationshipBetweenWords);
+					_uow.SaveChanges();
+					return RedirectToAction(MVC.Word.ActionNames.Index);
 				}
 				_uow.SaveChanges();
-				return RedirectToAction(MVC.Word.ActionNames.CreateRelationshipBetweenWord, new {id = word.ID});
+				return RedirectToAction(MVC.Word.ActionNames.CreateRelationshipBetweenWord, new { id = word.ID });
 			}
 			wordViewModel.Categories = _categoryService.GetSelectList();
 			wordViewModel.Languages = _languageService.GetSelectList();
@@ -149,7 +150,7 @@ namespace MedicallexiconProject.Controllers
 		public virtual ActionResult QuickSearch(string term)
 		{
 			var word = _wordService.Search(term).
-				Select(r => new {label = r.Name});
+				Select(r => new { label = r.Name });
 
 			return Json(word, JsonRequestBehavior.AllowGet);
 		}
@@ -178,8 +179,10 @@ namespace MedicallexiconProject.Controllers
 		private WordViewModel CreateWordViewModelByWordID(int id)
 		{
 			Word word = _wordService.GetByID(id);
+			int relatedCount = _RelationshipBetweenWordsService.GetRelationCount(id);
 			var wordMapper = new WordMapper();
 			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			wordViewModel.RelatedCount = relatedCount;
 			return wordViewModel;
 		}
 	}
