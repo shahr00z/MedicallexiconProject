@@ -1,1 +1,24 @@
-﻿
+﻿@model MedicallexiconProject.ViewModel.WordViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="right">
+    <h3>@Model.Name</h3>
+</div>
+<p>
+    <a href="~/" id="btnBack" class="btn btn-group">Back to Home Page
+    </a>
+</p>
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="span2">
+            @Html.Action("GetLanguage", "Word")
+        </div>
+        <div class="span2">
+        </div>
+        <div class="span10">
+            @Html.Raw(Model.Text)
+        </div>
+    </div>
+</div>

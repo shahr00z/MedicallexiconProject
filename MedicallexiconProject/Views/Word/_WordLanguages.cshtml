@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MedicallexiconProject.ViewModel.LanguageViewModel>
+@{
+	ViewBag.Title = "_WordLanguages";
+}
+
+<h2>Language</h2>
+
+
+@foreach (var item in Model)
+{
+    <ul>
+        <li>@item.Name</li>
+    </ul>
+}

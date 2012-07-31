@@ -1,4 +1,5 @@
-﻿using DomainClasses.Models;
+﻿using System.Collections.Generic;
+using DomainClasses.Models;
 
 namespace ServiceLayer.Interfaces
 {
@@ -6,5 +7,6 @@ namespace ServiceLayer.Interfaces
 	{
 		int GetLagnuageCount(int wordID);
 		int GetRelationCount(int wordID);
+		IList<Language> GetLanguage(int wordID);
 	}
 }

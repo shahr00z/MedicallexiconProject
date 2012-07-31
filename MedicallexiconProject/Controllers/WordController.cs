@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -120,6 +121,13 @@ namespace MedicallexiconProject.Controllers
 			return View(wordViewModel);
 		}
 
+		public virtual ActionResult GetLanguage(int id)
+		{
+			var language = _RelationshipBetweenWordsService.GetLanguage(id);
+			var languageMapper = new LanguageMapper();
+			var model = languageMapper.ModelsViewModelsMapping(language);
+			return PartialView("_WordLanguages", model);
+		}
 
 		[HttpPost]
 		public virtual ActionResult Delete(int id)

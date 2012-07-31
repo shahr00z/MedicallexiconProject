@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="Classes\BundleConfig.cs" />
     <Compile Include="Classes\CustomMapper\Category.cs" />
+    <Compile Include="Classes\CustomMapper\Language.cs" />
     <Compile Include="Classes\CustomMapper\Mapper.cs" />
     <Compile Include="Classes\CustomMapper\Word.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -592,6 +593,7 @@
     <Content Include="Views\Word\_DeleteWord.cshtml" />
     <Content Include="Views\Word\CreateRelationshipBetweenWord.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Word\_WordLanguages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

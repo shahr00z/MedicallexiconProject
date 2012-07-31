@@ -74,6 +74,14 @@ namespace ServiceLayer.Services
 			return _relationshipBetweenWords.Count(x => x.MainWord.ID == wordID);
 		}
 
+		public IList<Language> GetLanguage(int wordID)
+		{
+			var language =
+				_relationshipBetweenWords.Where(x => x.RelatedWord.ID == wordID)
+				.Select(x => x.RelatedWord.Language).Distinct().ToList();
+			return language;
+		}
+
 		#endregion
 	}
 }

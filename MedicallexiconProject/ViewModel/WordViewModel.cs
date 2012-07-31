@@ -25,6 +25,7 @@ namespace MedicallexiconProject.ViewModel
 		public string LanguageName { get; set; }
 		public string CategoryName { get; set; }
 		public string Description { get; set; }
+		[AllowHtml]
 		public string Text { get; set; }
 		public string WordRelatedName { get; set; }
 		public int WordRelatedID { get; set; }

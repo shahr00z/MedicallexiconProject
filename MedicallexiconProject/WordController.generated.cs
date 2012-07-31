@@ -54,6 +54,11 @@ namespace MedicallexiconProject.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult GetLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.GetLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Delete() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Delete);
         }
@@ -106,6 +111,7 @@ namespace MedicallexiconProject.Controllers {
             public readonly string Create = "Create";
             public readonly string UploadWordsPicture = "UploadWordsPicture";
             public readonly string Details = "Details";
+            public readonly string GetLanguage = "GetLanguage";
             public readonly string Delete = "Delete";
             public readonly string Edit = "Edit";
             public readonly string WordInfo = "WordInfo";
@@ -121,6 +127,7 @@ namespace MedicallexiconProject.Controllers {
             public const string Create = "Create";
             public const string UploadWordsPicture = "UploadWordsPicture";
             public const string Details = "Details";
+            public const string GetLanguage = "GetLanguage";
             public const string Delete = "Delete";
             public const string Edit = "Edit";
             public const string WordInfo = "WordInfo";
@@ -159,6 +166,13 @@ namespace MedicallexiconProject.Controllers {
         public ActionParamsClass_Details DetailsParams { get { return s_params_Details; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Details {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_GetLanguage s_params_GetLanguage = new ActionParamsClass_GetLanguage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetLanguage GetLanguageParams { get { return s_params_GetLanguage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetLanguage {
             public readonly string id = "id";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
@@ -260,6 +274,12 @@ namespace MedicallexiconProject.Controllers {
 
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetLanguage(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetLanguage);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
