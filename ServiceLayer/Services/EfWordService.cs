@@ -48,10 +48,9 @@ namespace ServiceLayer.Services
 
 		public void Delete(int id)
 		{
-			var toDelete = new Word { ID = id };
+			var toDelete = new Word {ID = id};
 			_words.Attach(toDelete);
 			_words.Remove(toDelete);
-			
 		}
 
 		public void Edit(int id, Word obj)
@@ -64,15 +63,15 @@ namespace ServiceLayer.Services
 			return null;
 		}
 
-		public IList<Word> GetAllWordByCategory(Category category)
+		public IList<Word> GetAllWordByCategory(string category)
 		{
-			List<Word> words = _words.Where(x => x.Category == category).ToList();
+			List<Word> words = _words.Where(x => x.Category.Name == category).ToList();
 			return (words);
 		}
 
-		public IList<Word> GetAllWordByLanguage(Language language)
+		public IList<Word> GetAllWordByLanguage(string language)
 		{
-			List<Word> words = _words.Where(x => x.Language == language).ToList();
+			List<Word> words = _words.Where(x => x.Language.Name == language).ToList();
 			return (words);
 		}
 
@@ -115,6 +114,12 @@ namespace ServiceLayer.Services
 		{
 			Word word = _words.FirstOrDefault(x => x.Name == name & x.LanguageID == selectedLanguageID);
 			return (word);
+		}
+
+		public IList<Word> GetWordsByLanguageAndCategory(string category, string language)
+		{
+			List<Word> words = _words.Where(x => x.Category.Name == category && x.Language.Name == language).ToList();
+			return (words);
 		}
 
 		#endregion

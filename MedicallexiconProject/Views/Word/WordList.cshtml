@@ -1,0 +1,60 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+@model IEnumerable<MedicallexiconProject.ViewModel.WordViewModel>
+@{
+	ViewBag.Title = "مدیریت کلمه ها";
+}
+@Html.Partial(MVC.Word.Views._WordList)
+@section scripts
+{
+	<script type="text/javascript">
+	    $(function() {
+
+	        function LaodWordInfo(id) {
+	            showProgress();
+	            $.ajax({
+	                    type: "Post",
+	                    //Just Use URL Action
+	                    url: '@Url.Action(MVC.Word.WordInfo())',
+	                    data: JSON.stringify({ ID: id }),
+	                    contentType: "application/json; charset=utf-8",
+	                    dataType: "json",
+	                    complete: function(xhr, status) {
+	                        var data = xhr.responseText;
+	                        if (status === 'error' || !data) {
+
+	                        } else {
+	                            var dialog = $("#dialog");
+	                            dialog.html(data);
+	                            dialog.dialog("open");
+	                        }
+	                        hideProgress();
+	                        return false;
+	                    }
+	                }
+	            );
+	        }
+
+	        function showProgress() {
+	            $('#Progress').css("display", "block");
+	        }
+
+	        function hideProgress() {
+	            $('#Progress').css("display", "none");
+	        }
+
+	        $(function() {
+	            $("#dialog").dialog({
+	                autoOpen: false,
+	                show: "fade",
+	                hide: "fade",
+	                width: 550,
+	                title: "WordInfo",
+	                resizable: false
+	            });
+	        });
+	    });
+	</script>
+}

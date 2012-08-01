@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -36,11 +35,11 @@ namespace MedicallexiconProject.Controllers
 		public virtual ActionResult Index(string sort, string sortdir, int? page = 1)
 		{
 			IList<Word> list = _wordService.GetAll();
-			var wordMapper = new WordMapper();
-			IEnumerable<WordViewModel> model = wordMapper.ModelsViewModelsMapping(list);
+			IEnumerable<WordViewModel> model = GetWordViewModels(list);
 
 			return View(model);
 		}
+
 
 		[HttpGet]
 		public virtual ActionResult Create(int wordID = 0)
@@ -123,9 +122,9 @@ namespace MedicallexiconProject.Controllers
 
 		public virtual ActionResult GetLanguage(int id)
 		{
-			var language = _RelationshipBetweenWordsService.GetLanguage(id);
+			IList<Language> language = _RelationshipBetweenWordsService.GetLanguage(id);
 			var languageMapper = new LanguageMapper();
-			var model = languageMapper.ModelsViewModelsMapping(language);
+			IEnumerable<LanguageViewModel> model = languageMapper.ModelsViewModelsMapping(language);
 			return PartialView("_WordLanguages", model);
 		}
 
@@ -188,10 +187,50 @@ namespace MedicallexiconProject.Controllers
 		{
 			Word word = _wordService.GetByID(id);
 			int relatedCount = _RelationshipBetweenWordsService.GetRelationCount(id);
-			var wordMapper = new WordMapper();
-			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			WordViewModel wordViewModel = GetWordViewModel(word);
 			wordViewModel.RelatedCount = relatedCount;
 			return wordViewModel;
+		}
+
+		private static WordViewModel GetWordViewModel(Word word)
+		{
+			var wordMapper = new WordMapper();
+			WordViewModel wordViewModel = wordMapper.ModelViewModelMapping(word);
+			return wordViewModel;
+		}
+
+		private static IEnumerable<WordViewModel> GetWordViewModels(IEnumerable<Word> list)
+		{
+			var wordMapper = new WordMapper();
+			IEnumerable<WordViewModel> WordViewModels = wordMapper.ModelsViewModelsMapping(list);
+			return WordViewModels;
+		}
+
+		public virtual ActionResult GetWords(string category, string language)
+		{
+			IEnumerable<Word> words;
+			IEnumerable<WordViewModel> wordViewModels;
+			if ((!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(language)))
+			{
+				words = _wordService.GetWordsByLanguageAndCategory(category, language);
+				wordViewModels = GetWordViewModels(words);
+				return View("WordList", wordViewModels);
+			}
+			if (!(string.IsNullOrEmpty(category)))
+			{
+				words = _wordService.GetAllWordByCategory(category);
+				wordViewModels = GetWordViewModels(words);
+				return View("WordList", wordViewModels);
+			}
+			if (!(string.IsNullOrEmpty(language)))
+			{
+				words = _wordService.GetAllWordByLanguage(language);
+				wordViewModels = GetWordViewModels(words);
+				return View("WordList", wordViewModels);
+			}
+			words = _wordService.GetAll();
+			wordViewModels = GetWordViewModels(words);
+			return View("WordList", wordViewModels);
 		}
 	}
 }

@@ -29,11 +29,5 @@ namespace MedicallexiconProject.Controllers
 			return View(model);
 		}
 
-		//[HttpGet]
-		//public ActionResult Create()
-		//{
-		//	var category=new Category 
-		//	return View();
-		//}
 	}
 }

@@ -2,6 +2,7 @@
 using AutoMapper;
 using DataLayer.Context;
 using DomainClasses.Models;
+using MedicallexiconProject.Classes.CustomMapper;
 using MedicallexiconProject.ViewModel;
 using ServiceLayer.Interfaces;
 
@@ -24,7 +25,9 @@ namespace MedicallexiconProject.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(_languagService.GetAll());
+			var mapper = new LanguageMapper();
+			var languageViewModel = mapper.ModelsViewModelsMapping(_languagService.GetAll());
+			return View(languageViewModel);
 		}
 
 		public virtual ActionResult Create()

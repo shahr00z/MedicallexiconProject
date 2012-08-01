@@ -92,6 +92,11 @@ namespace MedicallexiconProject.Controllers {
         public System.Web.Mvc.ActionResult CreateRelationshipBetweenWord() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.CreateRelationshipBetweenWord);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult GetWords() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.GetWords);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public WordController Actions { get { return MVC.Word; } }
@@ -119,6 +124,7 @@ namespace MedicallexiconProject.Controllers {
             public readonly string QuickSearch = "QuickSearch";
             public readonly string CheckWord = "CheckWord";
             public readonly string CreateRelationshipBetweenWord = "CreateRelationshipBetweenWord";
+            public readonly string GetWords = "GetWords";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -135,6 +141,7 @@ namespace MedicallexiconProject.Controllers {
             public const string QuickSearch = "QuickSearch";
             public const string CheckWord = "CheckWord";
             public const string CreateRelationshipBetweenWord = "CreateRelationshipBetweenWord";
+            public const string GetWords = "GetWords";
         }
 
 
@@ -225,6 +232,14 @@ namespace MedicallexiconProject.Controllers {
         public class ActionParamsClass_CreateRelationshipBetweenWord {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_GetWords s_params_GetWords = new ActionParamsClass_GetWords();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetWords GetWordsParams { get { return s_params_GetWords; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetWords {
+            public readonly string category = "category";
+            public readonly string language = "language";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -232,12 +247,14 @@ namespace MedicallexiconProject.Controllers {
         public class ViewNames {
             public readonly string _DeleteWord = "~/Views/Word/_DeleteWord.cshtml";
             public readonly string _WordInfo = "~/Views/Word/_WordInfo.cshtml";
+            public readonly string _WordLanguages = "~/Views/Word/_WordLanguages.cshtml";
             public readonly string _WordList = "~/Views/Word/_WordList.cshtml";
             public readonly string _WordSearch = "~/Views/Word/_WordSearch.cshtml";
             public readonly string Create = "~/Views/Word/Create.cshtml";
             public readonly string CreateRelationshipBetweenWord = "~/Views/Word/CreateRelationshipBetweenWord.cshtml";
             public readonly string Details = "~/Views/Word/Details.cshtml";
             public readonly string Index = "~/Views/Word/Index.cshtml";
+            public readonly string WordList = "~/Views/Word/WordList.cshtml";
         }
     }
 
@@ -331,6 +348,13 @@ namespace MedicallexiconProject.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateRelationshipBetweenWord);
             callInfo.RouteValueDictionary.Add("mainWordID", mainWordID);
             callInfo.RouteValueDictionary.Add("wordID", wordID);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetWords(string category, string language) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetWords);
+            callInfo.RouteValueDictionary.Add("category", category);
+            callInfo.RouteValueDictionary.Add("language", language);
             return callInfo;
         }
 
